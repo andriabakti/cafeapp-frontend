@@ -1,35 +1,60 @@
 <template>
-  <div class="container">
-    <h3>Register</h3>
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" v-model="email" aria-describedby="emailHelp">
-        <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+  <div class="container-fluid">
+    <div class="row no-gutters">
+      <div class="col-lg-12 main">
+        <form>
+          <h3 class="title">Register</h3>
+          <div class="form-group">
+            <label>Your email</label>
+            <input type="email" class="form-control" v-model="email" placeholder="Type here">
+          </div>
+          <div class="form-group">
+            <label>Your password</label>
+            <input type="password" class="form-control" v-model="password" placeholder="Type here">
+          </div>
+          <div class="form-group">
+            <label>Your username</label>
+            <input type="text" class="form-control" v-model="username" placeholder="Type here">
+          </div>
+          <div class="submit">
+            <button class="btn" @click="handleRegister">Register</button>
+            <span>Already have an account?</span>
+            <div>
+              <span>Login</span>
+              <span class="link" @click="toLogin">here</span>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" v-model="password">
-      </div>
-      <div class="form-group">
-        <label for="inputFirstName">First Name</label>
-        <input type="firstName" class="form-control" id="firstName">
-      </div>
-      <div class="form-group">
-        <label for="inputLastName">Last Name</label>
-        <input type="lastName" class="form-control" id="lastName">
-      </div>
-      <button type="submit" class="btn btn-primary" @click="handleLogin">Submit</button>
-      <button type="forward" class="btn btn-secondary" id="toLogin" @click="toLogin">Next</button>
-
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Register',
+  data: () => {
+    return {
+      email: '',
+      password: '',
+      username: '',
+    }
+  },
   methods: {
+    ...mapActions(['register']),
+    handleRegister (e) {
+      e.preventDefault()
+      const data = {
+        email: this.email,
+        password: this.password,
+        username: this.username
+      }
+      this.register(data)
+        .then(() => {
+          this.$router.push('/auth/login')
+        }
+      )
+    },
     toLogin () {
       this.$router.push('/auth/login')
     }
@@ -38,22 +63,77 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 500px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: 50px auto;
-  padding: 20px;
-  border: gray 1px solid;
-  border-radius: 10px;
+/* Background */
+.container-fluid {
+  background-image: url('../../../assets/images/bg.jpg');
+  background-size: cover;
+}
+@media screen and (max-width: 500px) {
+  .container-fluid  {
+    background-image: none;
+  }
+}
+.row {
+  height: 100vh;
+}
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Box Body */
+form {
+  width: 400px;
+  padding: 30px 35px;
+  border-radius: 20px;
   box-shadow: 0 4px 7px rgb(0, 0, 0, 0.3);
+  background-color: #ffffff;
 }
-h3 {
-  text-align: center;
+@media screen and (max-width: 500px) {
+  form {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* Box Title */
+.title {
+  color: #F24F8A;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
 }
-#toLogin {
-  margin-left: 320px;
+/* Form Label */
+label {
+  font-weight: 500;
+}
+
+/* Submit & Login */
+.submit {
+  text-align: right;
+}
+.submit button {
+  /* Button */
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 15px;
+  background-color: #F24F8A;
+  margin: 30px 0;
+  /* Button Text */
+  font-weight: 500;
+  color: #ffffff;
+}
+.submit span {
+  font-weight: 500;
+}
+.link {
+  color: #F24F8A;
+  cursor: pointer;
 }
 </style>

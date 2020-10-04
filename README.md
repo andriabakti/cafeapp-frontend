@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # cafe-app
 
 ## Project setup
@@ -23,6 +22,3 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
-# cafeapp-frontend
->>>>>>> 2b0057816ca30ec5155707bfafd9b6e897086a43

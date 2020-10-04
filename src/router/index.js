@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Main/Home/Home.vue'
 import History from '../views/Main/History/History.vue'
+import Product from '../views/Main/Product/Product.vue'
 import Login from '../views/Auth/Login/Login.vue'
 import Register from '../views/Auth/Register/Register.vue'
 import store from '../store/index'
@@ -16,9 +17,16 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/history/:id',
+    path: '/history',
     name: 'History',
-    component: History
+    component: History,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/product',
+    name: 'Product',
+    component: Product,
+    meta: { requiresAuth: true }
   },
   {
     path: '/auth/register',

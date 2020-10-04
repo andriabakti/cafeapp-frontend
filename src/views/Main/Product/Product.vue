@@ -1,32 +1,37 @@
 <template>
-    <div class="container">
-        <h2>Product</h2>
-        <div class="row">
-        <div class="col-md-3 card-cos" v-for="item in products" :key="item.id">
-            <Card :data="item"/>
-        </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row">
+      <Titlebar/>
     </div>
+    <div class="body row">
+      <Sidebar/>
+      <div class="content col-md-11">
+        <Card/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import Card from '../../../components/_base/Card'
+import Sidebar from '../../../components/_base/Sidebar'
+import Titlebar from '../../../components/_base/Titlebar'
+import Card from '../../../components/_base/Home/Card'
 
 export default {
   name: 'Product',
   components: {
+    Sidebar,
+    Titlebar,
     Card
-  },
-  data () {
-    return {
-      products: []
-    }
   }
 }
 </script>
 
 <style scoped>
-    .card-cos {
-        padding: 10px;
-    }
+  .container-fluid {
+  background-color: rgba(190, 195, 202, 0.3);
+}
+.body {
+  position: relative;
+}
 </style>

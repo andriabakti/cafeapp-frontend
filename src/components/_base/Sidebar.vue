@@ -1,9 +1,13 @@
 <template>
-    <nav>
-        <img src="../../assets/images/fork.png">
-        <img src="../../assets/images/clip.png">
-        <img src="../../assets/images/add.png">
-        <button class="btn btn-primary" @click="toLogout">Logout</button>
+    <nav class="side col-md-1">
+      <div class="up">
+        <button id="product" @click="toHome"></button>
+        <button id="history" @click="toHistory"></button>
+        <button id="addition" @click="$emit('toggle-active')"></button>
+      </div>
+      <div class="down">
+        <button id="exit" @click="toLogout"></button>
+      </div>
     </nav>
 </template>
 
@@ -13,25 +17,55 @@ import { mapActions } from 'vuex'
 export default {
   name: 'Sidebar',
   methods: {
+    toHome () {
+      this.$router.push('/home')
+    },
+    toHistory () {
+      this.$router.push('/history')
+    },
     ...mapActions(['toLogout'])
   }
 }
 </script>
 
 <style scoped>
-nav{
-    height: 940px;
-    width: 100px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+.side {
+  height: 545px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 }
-nav img{
-    height: 40px;
-    width: 40px;
-    margin: 30px;
+.up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.down {
+  margin-bottom: 20px;
+}
+button {
+  height: 60px;
+  width: 60px;
+  margin: 20px 0 0;
+  background-size: 40px 40px;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+#product {
+  background-image: url("../../assets/images/fork.png");
+}
+#history {
+  background-image: url("../../assets/images/clip.png");
+}
+#addition {
+  background-image: url("../../assets/images/add.png");
+}
+#exit {
+  background-image: url("../../assets/images/exit.png");
 }
 </style>

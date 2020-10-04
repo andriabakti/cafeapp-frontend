@@ -1,21 +1,45 @@
 <template>
-    <div>
-      <h2>History {{$route.params.id}}</h2>
-      <h4>{{$route.params.name}}</h4>
-      <h6>Search : {{$route.query.search}}</h6>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime aliquam deserunt recusandae aut perspiciatis cumque omnis, soluta ab, sunt quae, sit rem debitis cupiditate! Sequi molestiae quisquam consectetur, autem in ut, odit voluptatem quis labore excepturi qui iste quidem sapiente dolores neque officia vero eligendi! Commodi esse cupiditate, nobis doloremque fuga porro officia veritatis eveniet provident molestias quidem consequuntur, tenetur et exercitationem dolore vero accusantium ullam corporis ducimus culpa temporibus tempore, autem suscipit recusandae! Quaerat magnam voluptatem, reiciendis eum minus suscipit eveniet mollitia! Inventore quae, commodi aliquam saepe expedita vel ratione ipsum minus impedit enim voluptatum quod possimus laboriosam natus?</p>
+  <div class="container-fluid">
+    <div class="row">
+      <Titlebar/>
     </div>
+    <div class="body row">
+      <Sidebar/>
+      <div class="content col-md-11">
+        <Longcard/>
+        <Longcard/>
+        <Longcard/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import Sidebar from '../../../components/_base/Sidebar'
+import Titlebar from '../../../components/_base/Titlebar'
+import Longcard from '../../../components/_base/Longcard'
 
 export default {
   name: 'History',
   components: {
+    Sidebar,
+    Titlebar,
+    Longcard
   }
 }
 </script>
 
 <style scoped>
-
+.container-fluid {
+  background-color: rgba(190, 195, 202, 0.3);
+}
+.content {
+  height: 545px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 0 15px 0;
+  overflow: auto;
+}
 </style>

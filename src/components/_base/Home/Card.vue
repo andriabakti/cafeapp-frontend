@@ -21,31 +21,32 @@ export default {
 
 <style scoped>
 .card{
+  height: 260px;
   text-align: left;
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-bottom: auto;
+  margin-bottom: 10px;
   margin-top: 25px;
   border-radius: 10px 10px 0 0;
   border: 0;
   background: none;
 }
 .card img{
-  height: 180px;
-  width: 230px;
+  height: 165px;
+  width: 210px;
   border-radius: 10px 10px 0 0;
 }
 .text{
   width: 200px;
 }
 .text h3{
-  font-size: 25px;
+  font-size: 22px;
   font-weight: normal;
-  margin: 0;
+  margin: 5px 0 0 0;
 }
 .text p{
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   margin: 0;
 }
