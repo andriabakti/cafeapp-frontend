@@ -27,7 +27,31 @@ export default new Vuex.Store({
       state.paginations = payload
     }
   },
+  getters: {
+    isLogin (state) {
+      return state.token !== null
+    },
+    products (state) {
+      return state.products
+    },
+    getPage (state) {
+      return state.paginations
+    }
+  },
   actions: {
+    register ({ commit }, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/users/register`, payload)
+          .then((res) => {
+            console.log(res)
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            console.log(err)
+            reject(err)
+          })
+      })
+    },
     login ({ commit }, payload) {
       return new Promise((resolve, reject) => {
         axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/users/login`, payload)
@@ -35,6 +59,7 @@ export default new Vuex.Store({
             console.log(res)
             commit('setUser', res.data.result)
             localStorage.setItem('token', res.data.result.token)
+            router.push('/home')
             resolve(res.data.result[0])
           })
           .catch((err) => {
@@ -43,25 +68,33 @@ export default new Vuex.Store({
           })
       })
     },
-    interceptorsResponse ({ commit }) {
-      axios.interceptors.response.use(function (response) {
-        return response
-      }, function (error) {
-        console.log(error.response)
-        if (error.response.status === 403 && error.response.data.result.message === 'token invalid') {
-          alert('Token tidak boleh diubah')
-          localStorage.removeItem('token')
-          commit('setToken', null)
-          router.push('/auth/login')
-        }
-        return Promise.reject(error)
-      })
-    },
     interceptorsRequest (context) {
       axios.interceptors.request.use(function (config) {
         config.headers.Authorization = `Bearer ${context.state.token}`
         return config
       }, function (error) {
+        return Promise.reject(error)
+      })
+    },
+    interceptorsResponse ({ commit }) {
+      axios.interceptors.response.use(function (response) {
+        return response
+      }, function (error) {
+        console.log(error.response.data.result.message)
+        if (error.response.status === 401) {
+          console.log(error.response)
+          if (error.response.data.result.message === 'Token is invalid') {
+            commit('setToken', null)
+            localStorage.removeItem('token')
+            router.push('/login')
+            alert('Anda tidak boleh merubah token')
+          } else if (error.response.data.result.message === 'Token is expired') {
+            commit('setToken', null)
+            localStorage.removeItem('token')
+            router.push('/login')
+            alert('Session telah habis, silahkan login kembali')
+          }
+        }
         return Promise.reject(error)
       })
     },
@@ -96,18 +129,7 @@ export default new Vuex.Store({
     toLogout ({ commit }) {
       localStorage.removeItem('token')
       commit('setToken', null)
-      router.push('/auth/login')
-    }
-  },
-  getters: {
-    isLogin (state) {
-      return state.token !== null
-    },
-    products (state) {
-      return state.products
-    },
-    getPage (state) {
-      return state.paginations
+      router.push('/login')
     }
   },
   modules: {

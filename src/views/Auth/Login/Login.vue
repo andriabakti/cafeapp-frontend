@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid p-0">
     <div class="row no-gutters">
       <div class="col-lg-12 main">
         <form>
@@ -63,14 +63,12 @@ export default {
 .container-fluid {
   background-image: url('../../../assets/images/bg.jpg');
   background-size: cover;
+  height: 100vh;
 }
 @media screen and (max-width: 500px) {
   .container-fluid  {
     background-image: none;
   }
-}
-.row {
-  height: 100vh;
 }
 .main {
   display: flex;
