@@ -44,10 +44,13 @@ export default new Vuex.Store({
         axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/users/register`, payload)
           .then((res) => {
             console.log(res)
+            router.push('/login')
+            // alert('Registrasi akun berhasil')
             resolve(res.data.result)
           })
           .catch((err) => {
             console.log(err)
+            alert('Registrasi akun gagal')
             reject(err)
           })
       })
@@ -60,10 +63,12 @@ export default new Vuex.Store({
             commit('setUser', res.data.result)
             localStorage.setItem('token', res.data.result.token)
             router.push('/home')
+            alert('Login berhasil')
             resolve(res.data.result[0])
           })
           .catch((err) => {
             console.log(err)
+            alert('Login gagal')
             reject(err)
           })
       })

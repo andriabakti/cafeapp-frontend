@@ -1,5 +1,5 @@
 <template>
-  <button class="card" @click="$emit('toggle-event', data.name)">
+  <button class="btn card" @click="$emit('toggle-event', data.name)">
     <img :src="data.image">
     <div class="text">
       <h3>{{data.name}}</h3>
