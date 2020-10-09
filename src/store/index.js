@@ -10,7 +10,8 @@ export default new Vuex.Store({
     user: {},
     token: localStorage.getItem('token') || null,
     products: [],
-    paginations: {}
+    paginations: null,
+    carts: []
   },
   mutations: {
     setUser (state, payload) {
@@ -25,6 +26,22 @@ export default new Vuex.Store({
     },
     setPaginations (state, payload) {
       state.paginations = payload
+    },
+    addCart (state, payload) {
+      const isCart = state.carts.find((item) => {
+        return item.id === payload.id
+      })
+      console.log(isCart)
+      if (!isCart) {
+        const item = payload
+        item.count = 1
+        state.carts.push(item)
+      } else {
+        console.log(payload.id)
+        state.carts = state.carts.filter((item) => {
+          return item.id !== payload.id
+        })
+      }
     }
   },
   getters: {
@@ -36,6 +53,12 @@ export default new Vuex.Store({
     },
     getPage (state) {
       return state.paginations
+    },
+    getCart (state) {
+      return state.carts
+    },
+    countCart (state) {
+      return state.carts.length
     }
   },
   actions: {
@@ -45,7 +68,7 @@ export default new Vuex.Store({
           .then((res) => {
             console.log(res)
             router.push('/login')
-            // alert('Registrasi akun berhasil')
+            alert('Registrasi akun berhasil')
             resolve(res.data.result)
           })
           .catch((err) => {
@@ -123,10 +146,40 @@ export default new Vuex.Store({
         axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/products`, payload)
           .then((res) => {
             console.log(res)
-            resolve(res.data.result)
+            alert('Add product berhasil')
+            resolve(res)
           })
           .catch((err) => {
             console.log(err)
+            alert('Add product gagal')
+            reject(err)
+          })
+      })
+    },
+    editProducts (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/products${payload.id}`, payload.data)
+          .then((res) => {
+            console.log(res)
+            alert('Edit product berhasil')
+            resolve(res)
+          })
+          .catch((err) => {
+            alert('Edit product gagal')
+            reject(err)
+          })
+      })
+    },
+    deleteProducts (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.delete(`${process.env.VUE_APP_BASE_URL}/api/v1/products${payload.id}`, payload)
+          .then((res) => {
+            console.log(res)
+            alert('Delete product berhasil')
+            resolve(res)
+          })
+          .catch((err) => {
+            alert('Delete product gagal')
             reject(err)
           })
       })
@@ -135,6 +188,7 @@ export default new Vuex.Store({
       localStorage.removeItem('token')
       commit('setToken', null)
       router.push('/login')
+      alert('Anda telah logout')
     }
   },
   modules: {

@@ -1,11 +1,15 @@
 <template>
-  <button class="btn card" @click="$emit('toggle-event', data.name)">
-    <img :src="data.image">
+  <div class="btn card">
+    <img :src="data.image" @click="$emit('toggle-event')">
     <div class="text">
       <h3>{{data.name}}</h3>
       <p>Rp. {{data.price}}</p>
+      <div>
+        <button class="btn btn-active" @click="$emit('event-update', data)">Edit</button>
+        <button class="btn btn-warning" @click="$emit('delete-event')">Delete</button>
+      </div>
     </div>
-  </button>
+  </div>
 </template>
 
 <script>
@@ -36,6 +40,7 @@ export default {
   height: 165px;
   width: 210px;
   border-radius: 10px 10px 0 0;
+  cursor: pointer;
 }
 .text{
   width: 200px;

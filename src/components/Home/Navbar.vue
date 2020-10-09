@@ -3,13 +3,11 @@
         <div class="title-bar col-md-8">
             <button id="menu" @click="toProduct"></button>
             <h3>Food Items</h3>
-            <div class="main">
-                <input type="text" class="form-control" placeholder="Search" @keyup="setSearch">
-            </div>
+            <button class="main"></button>
         </div>
         <div class="cart-bar col-md-4">
             <h3>Cart</h3>
-            <p>0</p>
+            <p class="badge">0</p>
         </div>
     </div>
 </template>
@@ -63,7 +61,7 @@ button {
     margin-left: 13px;
     height: 60px;
     width: 60px;
-    background-image: url("../../../assets/images/menu.png");
+    background-image: url("../../assets/images/menu.png");
 }
 .title-bar h3 {
     font-size: 30px;
@@ -72,6 +70,7 @@ button {
 }
 .main {
     margin-right: 5px;
+    background-image: url('../../assets/images/search.png');
 }
 
 .cart-bar {
