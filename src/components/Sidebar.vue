@@ -57,15 +57,15 @@ button {
   border: none;
 }
 #product {
-  background-image: url("../../assets/images/fork.png");
+  background-image: url("../assets/images/fork.png");
 }
 #history {
-  background-image: url("../../assets/images/clip.png");
+  background-image: url("../assets/images/clip.png");
 }
 #addition {
-  background-image: url("../../assets/images/add.png");
+  background-image: url("../assets/images/add.png");
 }
 #exit {
-  background-image: url("../../assets/images/exit.png");
+  background-image: url("../assets/images/exit.png");
 }
 </style>
