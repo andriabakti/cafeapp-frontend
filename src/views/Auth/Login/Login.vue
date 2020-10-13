@@ -93,7 +93,7 @@ export default {
 }
 @media screen and (max-width: 500px) {
   .left {
-    background-image: url('/ex/assets/bg.jpg');
+    background-image: url('../../../assets/images/bg.jpg');
     background-size: cover;
   }
 }
