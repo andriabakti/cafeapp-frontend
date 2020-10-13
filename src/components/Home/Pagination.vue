@@ -2,6 +2,7 @@
     <div class="container-page">
         <nav aria-label="...">
             <ul class="pagination">
+                <h2>Page</h2>
                 <!-- <li class="page-item">
                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true" @click.prevent="$emit('page-event')">Previous</a>
                 </li> -->

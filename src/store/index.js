@@ -172,7 +172,7 @@ export default new Vuex.Store({
     },
     deleteProducts (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.delete(`${process.env.VUE_APP_BASE_URL}/api/v1/products${payload.id}`, payload)
+        axios.delete(`${process.env.VUE_APP_BASE_URL}/api/v1/products/${payload}`)
           .then((res) => {
             console.log(res)
             alert('Delete product berhasil')

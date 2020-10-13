@@ -24,7 +24,7 @@
           :active="checkProductActive(item.id)"
           @event-update="setUpdate(item)"
           @select-product="addCart(item)"
-          @delete-event="deleteProduct"
+          @delete-event="deleteProduct(item.id)"
         />
       </div>
       <Cart/>
@@ -88,9 +88,9 @@ export default {
     },
     toggleModal () {
       this.modalActive = !this.modalActive
-      if (!this.modalActive) {
-        this.clearModal()
-      }
+      // if (!this.modalActive) {
+      //   this.clearModal()
+      // }
     },
     clearModal () {
       this.dataModal.id = null
@@ -141,8 +141,8 @@ export default {
     handleEventModal () {
       this.dataModal.id ? this.updateProducts() : this.addProduct()
     },
-    deleteProduct () {
-      this.deleteProducts()
+    deleteProduct (id) {
+      this.deleteProducts(id)
         .then(res => {
           this.getProduct()
           alert('Delete berhasil')
