@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style scoped>
+/* .row {
+  height: 10vh;
+} */
 .title-bar {
     height: 90px;
     display: flex;

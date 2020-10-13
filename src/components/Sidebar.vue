@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
 .side {
-  height: 100%;
+  height: 86vh;
   display: flex;
   flex-direction: column;
   align-items: center;

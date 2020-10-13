@@ -18,14 +18,16 @@
           />
           <input type="text" class="form-control" placeholder="Search" @keyup="setSearch">
         </div>
-        <Card
-          v-for="item in products" :key="item.id"
-          :data="item" @toggle-event="addCart(item)"
-          :active="checkProductActive(item.id)"
-          @event-update="setUpdate(item)"
-          @select-product="addCart(item)"
-          @delete-event="deleteProduct(item.id)"
-        />
+        <div class="lower">
+          <Card
+            v-for="item in products" :key="item.id"
+            :data="item" @toggle-event="addCart(item)"
+            :active="checkProductActive(item.id)"
+            @event-update="setUpdate(item)"
+            @select-product="addCart(item)"
+            @delete-event="deleteProduct(item.id)"
+          />
+        </div>
       </div>
       <Cart/>
     </div>
@@ -150,7 +152,7 @@ export default {
     },
     setSearch (e) {
       const url = `?search=${e.target.value}`
-      this.getProduct(url)
+      this.getProducts(url)
     },
     setSort (e) {
       const url = `?sort=${e.target.value}`
@@ -182,19 +184,24 @@ export default {
 
 <style scoped>
 .content{
-  height: 100vh;
+  height: 86vh;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  padding-top: 15px;
+  flex-direction: column;
   background-color: rgba(190, 195, 202, 0.3);
   overflow: auto;
 }
 .upper {
-  height: 50px;
+  height: 100px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+}
+.lower {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-evenly;
+  padding-bottom: 30px;
 }
 </style>
