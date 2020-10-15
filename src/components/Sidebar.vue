@@ -1,19 +1,17 @@
 <template>
-    <nav class="side col-md-1">
-      <div class="up">
-        <button id="product" @click="toHome"></button>
-        <button id="history" @click="toHistory"></button>
-        <button id="addition" @click="$emit('toggle-active')"></button>
-      </div>
-      <div class="down">
-        <button id="exit" @click="toLogout"></button>
-      </div>
-    </nav>
+  <nav class="side col-lg-1">
+    <div class="up">
+      <button class="btn" id="product" @click="toHome"></button>
+      <button class="btn" id="history"></button>
+      <button class="btn" id="addition" @click="$emit('toggle-active')"></button>
+    </div>
+    <div class="down">
+      <button class="btn" id="exit" @click="$emit('toggle-exit')"></button>
+    </div>
+  </nav>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   name: 'Sidebar',
   methods: {
@@ -22,15 +20,14 @@ export default {
     },
     toHistory () {
       this.$router.push('/history')
-    },
-    ...mapActions(['toLogout'])
+    }
   }
 }
 </script>
 
 <style scoped>
 .side {
-  height: 86vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   align-items: center;

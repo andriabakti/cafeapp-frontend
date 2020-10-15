@@ -6,7 +6,7 @@
       <p>Rp. {{data.price}}</p>
       <div>
         <button class="btn btn-active" @click="$emit('event-update', data)">Edit</button>
-        <button class="btn btn-warning" @click="$emit('delete-event')">Delete</button>
+        <button class="btn btn-warning" @click="$emit('toggle-delete')">Delete</button>
       </div>
     </div>
   </div>

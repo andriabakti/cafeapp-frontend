@@ -5,7 +5,7 @@
             <h3>Your cart is empty</h3>
             <p>Please add some items from the menu</p>
         </div> -->
-        <ul class="list-unstyled">
+        <ul class="list-unstyled card">
             <li class="media"  v-for="item in getCart" :key="item.id">
                 <div class="container-img">
                     <img :src="item.image" class="mr-3">
@@ -48,6 +48,17 @@ export default {
     flex-direction: column;
     align-items: center;
     border-left: 1px solid #CECECE;
+    /* overflow: auto; */
+}
+.card {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    /* align-items: center; */
+    /* background-color: coral; */
+}
+.media {
+    border-bottom: 1px solid #CECECE;
 }
 /* .empty {
     display: flex;

@@ -11,12 +11,12 @@
         <form>
           <h3 class="title">Login</h3>
           <div class="form-group">
-            <label>Your email</label>
-            <input type="email" class="form-control" v-model="email" placeholder="Type here" required>
+            <label for="email">Your email</label>
+            <input type="email" id="email" class="form-control" v-model="email" placeholder="Type here" required>
           </div>
           <div class="form-group">
-            <label>Your password</label>
-            <input type="password" class="form-control" v-model="password" placeholder="Type here" required>
+            <label for="password">Your password</label>
+            <input type="password" id="password" class="form-control" v-model="password" placeholder="Type here" required>
           </div>
           <div class="submit">
             <button type="submit" class="btn" @click="handleLogin">Login</button>
@@ -52,9 +52,9 @@ export default {
         password: this.password
       }
       this.login(data)
-        .then(() => {
-          this.$router.push('/home')
-        })
+      // .then(() => {
+      //   this.$router.push('/home')
+      // })
     },
     toRegister () {
       this.$router.push('/register')
@@ -73,7 +73,7 @@ export default {
   background-image: url('../../../assets/images/bg.jpg');
   background-size: cover;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 960px) {
   .row {
     height: max-content;
   }
@@ -86,12 +86,12 @@ export default {
   justify-content: center;
   padding: 40px 0 20px;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 960px) {
   .left {
     padding: 50px 0 20px;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 540px) {
   .left {
     background-image: url('../../../assets/images/bg.jpg');
     background-size: cover;
@@ -101,8 +101,8 @@ export default {
 .brand {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 .name {
   color: #ffffff;
@@ -117,6 +117,12 @@ export default {
   font-size: 18px;
   font-weight: 700;
   margin-top: 20px;
+  text-align: center;
+}
+@media screen and (max-width: 540px) {
+  .sub {
+    padding: 0 20px;
+  }
 }
 
 /* Right Side */
@@ -134,12 +140,12 @@ form {
   box-shadow: 0 4px 7px rgb(0, 0, 0, 0.3);
   background-color: #ffffff;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 960px) {
   form {
     margin-bottom: 60px;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 540px) {
   form {
     width: 100%;
     height: 100%;

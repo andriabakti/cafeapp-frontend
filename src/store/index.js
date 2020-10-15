@@ -175,7 +175,7 @@ export default new Vuex.Store({
         axios.delete(`${process.env.VUE_APP_BASE_URL}/api/v1/products/${payload}`)
           .then((res) => {
             console.log(res)
-            alert('Delete product berhasil')
+            // alert('Delete product berhasil')
             resolve(res)
           })
           .catch((err) => {
@@ -188,7 +188,7 @@ export default new Vuex.Store({
       localStorage.removeItem('token')
       commit('setToken', null)
       router.push('/login')
-      alert('Anda telah logout')
+      alert('Logout berhasil')
     }
   },
   modules: {

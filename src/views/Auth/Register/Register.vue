@@ -11,16 +11,16 @@
         <form>
           <h3 class="title">Register</h3>
           <div class="form-group">
-            <label>Your email</label>
-            <input type="email" class="form-control" v-model="email" placeholder="Type here" required>
+            <label for="email">Your email</label>
+            <input type="email" id="email" class="form-control" v-model="email" placeholder="Type here" required>
           </div>
           <div class="form-group">
-            <label>Your password</label>
-            <input type="password" class="form-control" v-model="password" placeholder="Type here" required>
+            <label for="password">Your password</label>
+            <input type="password" id="password" class="form-control" v-model="password" placeholder="Type here" required>
           </div>
           <div class="form-group">
-            <label>Your username</label>
-            <input type="text" class="form-control" v-model="username" placeholder="Type here" required>
+            <label for="username">Your username</label>
+            <input type="text" id="usename" class="form-control" v-model="username" placeholder="Type here" required>
           </div>
           <div class="submit">
             <button type="submit" class="btn" @click="handleRegister">Register</button>
@@ -97,7 +97,7 @@ export default {
     padding: 50px 0 20px;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 540px) {
   .left {
     background-image: url('../../../assets/images/bg.jpg');
     background-size: cover;
@@ -123,6 +123,12 @@ export default {
   font-size: 18px;
   font-weight: 700;
   margin-top: 20px;
+  text-align: center;
+}
+@media screen and (max-width: 540px) {
+  .sub {
+    padding: 0 20px;
+  }
 }
 
 /* Right Side */
@@ -145,7 +151,7 @@ form {
     margin-bottom: 60px;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 540px) {
   form {
     width: 100%;
     height: 100%;

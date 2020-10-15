@@ -1,22 +1,22 @@
 <template>
   <div class="container-fluid">
-    <Navbar/>
+    <Navbar />
     <div class="body row">
-      <Sidebar @toggle-active="toggleModal"/>
+      <Sidebar @toggle-active="toggleModal" @toggle-exit="toggleExit" />
       <div class="content col-md-7">
         <div class="upper">
           <div class="form-group">
             <select id="sort" class="form-control" @change="setSort">
-              <option selected>- Sort by -</option>
+              <option selected>Sort by</option>
               <option value="name">Name</option>
               <option value="price">Price</option>
               <option value="idCategory">Category</option>
             </select>
           </div>
-          <Pagination
-            :data="pagination" @page-event="handlePage"
-          />
-          <input type="text" class="form-control" placeholder="Search" @keyup="setSearch">
+          <Pagination :data="pagination" @page-event="handlePage" />
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" @keyup="setSearch">
+          </div>
         </div>
         <div class="lower">
           <Card
@@ -25,16 +25,23 @@
             :active="checkProductActive(item.id)"
             @event-update="setUpdate(item)"
             @select-product="addCart(item)"
-            @delete-event="deleteProduct(item.id)"
+            @toggle-delete="toggleDelete"
           />
         </div>
       </div>
-      <Cart/>
+      <Cart />
     </div>
     <Modal
       v-show="modalActive" :data="dataModal"
       @close-modal="toggleModal" @save-event="addProduct"
       @fire-event="handleEventModal"
+    />
+    <Exit v-show="exitActive" @close-exit="toggleExit" />
+    <Delete
+      v-show="deleteActive"
+      @close-delete="toggleDelete"
+      v-for="item in products" :key="item.id"
+      @delete-event="deleteProduct(item.id)"
     />
   </div>
 </template>
@@ -45,6 +52,8 @@ import Sidebar from '../../../components/Sidebar'
 import Card from '../../../components/Home/Card'
 import Cart from '../../../components/Home/Cart'
 import Modal from '../../../components/Home/Modal'
+import Exit from './components/ExitModal'
+import Delete from './components/DeleteModal'
 import Pagination from '../../../components/Home/Pagination'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
@@ -56,12 +65,16 @@ export default {
     Card,
     Cart,
     Modal,
+    Exit,
+    Delete,
     Pagination
   },
   data: () => ({
     username: '',
     password: '',
     modalActive: false,
+    exitActive: false,
+    deleteActive: false,
     dataModal: {
       id: null,
       name: '',
@@ -81,18 +94,17 @@ export default {
     ...mapMutations([
       'addCart'
     ]),
-    handleLogin () {
-      const data = {
-        username: this.username,
-        password: this.password
-      }
-      this.login(data)
+    toggleExit () {
+      this.exitActive = !this.exitActive
+    },
+    toggleDelete () {
+      this.deleteActive = !this.deleteActive
     },
     toggleModal () {
       this.modalActive = !this.modalActive
-      // if (!this.modalActive) {
-      //   this.clearModal()
-      // }
+      if (!this.modalActive) {
+        this.clearModal()
+      }
     },
     clearModal () {
       this.dataModal.id = null
@@ -112,7 +124,7 @@ export default {
         .then(res => {
           this.clearModal()
           this.getProducts()
-          alert('Insert berhasil')
+          // alert('Insert berhasil')
         })
     },
     updateProduct () {
@@ -129,7 +141,7 @@ export default {
         .then(res => {
           this.clearModal()
           this.getProduct()
-          alert('Edit berhasil')
+          // alert('Edit berhasil')
         })
     },
     setUpdate (data) {
@@ -144,18 +156,19 @@ export default {
       this.dataModal.id ? this.updateProducts() : this.addProduct()
     },
     deleteProduct (id) {
+      // id.preventDefault()
       this.deleteProducts(id)
         .then(res => {
-          this.getProduct()
+          this.getProducts()
           alert('Delete berhasil')
         })
     },
-    setSearch (e) {
-      const url = `?search=${e.target.value}`
+    setSearch (event) {
+      const url = `?search=${event.target.value}`
       this.getProducts(url)
     },
-    setSort (e) {
-      const url = `?sort=${e.target.value}`
+    setSort (event) {
+      const url = `?sort=${event.target.value}`
       this.getProducts(url)
     },
     handlePage (number) {
@@ -184,7 +197,7 @@ export default {
 
 <style scoped>
 .content{
-  height: 86vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   background-color: rgba(190, 195, 202, 0.3);
@@ -194,7 +207,7 @@ export default {
   height: 100px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding-top: 15px;
 }
 .lower {
