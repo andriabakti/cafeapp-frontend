@@ -36,7 +36,7 @@
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="$emit('close-modal')">Close</button>
-                    <button type="button" class="btn btn-primary" @click="$emit('save-event')">Add</button>
+                    <button type="button" class="btn btn-primary" @click="$emit('fire-event')">{{data.id ? 'Update': 'Add'}}</button>
                 </div>
             </div>
         </div>

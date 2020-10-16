@@ -158,7 +158,8 @@ export default new Vuex.Store({
     },
     editProducts (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/products${payload.id}`, payload.data)
+        console.log('ini update product')
+        axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/products/${payload.id}`, payload.data)
           .then((res) => {
             console.log(res)
             alert('Edit product berhasil')
@@ -172,6 +173,7 @@ export default new Vuex.Store({
     },
     deleteProducts (context, payload) {
       return new Promise((resolve, reject) => {
+        console.log('ini delete product' + payload)
         axios.delete(`${process.env.VUE_APP_BASE_URL}/api/v1/products/${payload}`)
           .then((res) => {
             console.log(res)

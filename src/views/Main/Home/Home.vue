@@ -13,11 +13,11 @@
               <option value="idCategory">Category</option>
             </select>
           </div>
-          <Pagination :data="pagination" @page-event="handlePage" />
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search" @keyup="setSearch">
           </div>
         </div>
+        <Pagination :data="pagination" @page-event="handlePage" />
         <div class="lower">
           <Card
             v-for="item in products" :key="item.id"
@@ -40,8 +40,7 @@
     <Delete
       v-show="deleteActive"
       @close-delete="toggleDelete"
-      v-for="item in products" :key="item.id"
-      @delete-event="deleteProduct(item.id)"
+      @delete-event="deleteProduct()"
     />
   </div>
 </template>
@@ -75,6 +74,7 @@ export default {
     modalActive: false,
     exitActive: false,
     deleteActive: false,
+    deleteId: null,
     dataModal: {
       id: null,
       name: '',
@@ -97,7 +97,8 @@ export default {
     toggleExit () {
       this.exitActive = !this.exitActive
     },
-    toggleDelete () {
+    toggleDelete (id) {
+      this.deleteId = id
       this.deleteActive = !this.deleteActive
     },
     toggleModal () {
@@ -124,12 +125,11 @@ export default {
         .then(res => {
           this.clearModal()
           this.getProducts()
-          // alert('Insert berhasil')
         })
     },
     updateProduct () {
       const data = new FormData()
-      data.append('title', this.dataModal.title)
+      data.append('name', this.dataModal.name)
       data.append('price', this.dataModal.price)
       data.append('image', this.dataModal.image)
       data.append('idCategory', this.dataModal.idCategory)
@@ -140,8 +140,7 @@ export default {
       this.editProducts(container)
         .then(res => {
           this.clearModal()
-          this.getProduct()
-          // alert('Edit berhasil')
+          this.getProducts()
         })
     },
     setUpdate (data) {
@@ -153,12 +152,12 @@ export default {
       this.dataModal.idCategory = data.idCategory
     },
     handleEventModal () {
-      this.dataModal.id ? this.updateProducts() : this.addProduct()
+      this.dataModal.id ? this.updateProduct() : this.addProduct()
     },
-    deleteProduct (id) {
-      // id.preventDefault()
-      this.deleteProducts(id)
+    deleteProduct () {
+      this.deleteProducts(this.deleteId)
         .then(res => {
+          this.deleteId = null
           this.getProducts()
           alert('Delete berhasil')
         })
