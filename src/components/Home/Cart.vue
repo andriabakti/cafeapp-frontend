@@ -1,10 +1,10 @@
 <template>
     <div class="cart col-md-4">
-        <!-- <div class="empty">
+        <div class="empty">
             <img src="../../../assets/images/pan.png">
             <h3>Your cart is empty</h3>
             <p>Please add some items from the menu</p>
-        </div> -->
+        </div>
         <ul class="list-unstyled card">
             <li class="media"  v-for="item in getCart" :key="item.id">
                 <div class="container-img">
@@ -57,10 +57,10 @@ export default {
     /* align-items: center; */
     /* background-color: coral; */
 }
-.media {
+/* .media {
     border-bottom: 1px solid #CECECE;
-}
-/* .empty {
+} */
+.empty {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,7 +79,7 @@ export default {
     font-size: 15px;
     font-weight: bold;
     color:#CECECE;
-} */
+}
 .count-box input{
     width: 30px;
     font-size: 12px;
