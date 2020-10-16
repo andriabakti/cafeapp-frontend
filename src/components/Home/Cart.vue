@@ -1,7 +1,7 @@
 <template>
     <div class="cart col-md-4">
         <div class="empty">
-            <img src="../../../assets/images/pan.png">
+            <img src="../../assets/images/pan.png">
             <h3>Your cart is empty</h3>
             <p>Please add some items from the menu</p>
         </div>
