@@ -1,6 +1,6 @@
 <p align="center">
 
-  <h3 align="center">Cafetaria Web</h3>
+  <h1 align="center">Cafetaria Web</h1>
 
   <p align="center">
     <br />
