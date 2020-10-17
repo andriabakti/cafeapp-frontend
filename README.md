@@ -1,7 +1,5 @@
 <p align="center">
-
   <h1 align="center">Cafetaria Web</h1>
-
   <p align="center">
     <br />
     <a href="https://github.com/andriabakti/cafeapp-frontend"><strong>Explore the docs »</strong></a>
