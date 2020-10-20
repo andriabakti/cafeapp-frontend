@@ -7,7 +7,7 @@
     </div>
     <div class="cart-bar col-lg-4">
       <h3>Cart</h3>
-      <p class="badge">0</p>
+      <p class="badge">{{countCart}}</p>
     </div>
   </div>
 </template>
@@ -31,7 +31,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: 'products'
+      products: 'products',
+      countCart: 'countCart'
     })
   },
   mounted () {

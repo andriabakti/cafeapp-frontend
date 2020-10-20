@@ -1,9 +1,9 @@
 <template>
   <div class="btn card">
-    <img :src="data.image" @click="$emit('toggle-event')">
+    <img :src="data.image" @click="$emit('toggle-event')" :class="active? 'active': ''">
     <div class="text">
       <h3>{{data.name}}</h3>
-      <p>Rp. {{data.price}}</p>
+      <p>Rp. {{new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 3 }).format(data.price)}}</p>
       <div>
         <button class="btn btn-active" @click="$emit('event-update', data)">Edit</button>
         <button class="btn btn-warning" @click="$emit('toggle-delete', data.id)">Delete</button>
@@ -18,6 +18,9 @@ export default {
   props: {
     data: {
       type: Object
+    },
+    active: {
+      type: Boolean
     }
   }
 }
@@ -54,5 +57,11 @@ export default {
   font-size: 22px;
   font-weight: bold;
   margin: 0;
+}
+
+.active {
+  filter: brightness(50%);
+  /* filter: url('../../assets/images/tick.png'); */
+  /* background-origin: ; */
 }
 </style>

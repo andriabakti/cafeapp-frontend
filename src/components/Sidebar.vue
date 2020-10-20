@@ -2,7 +2,7 @@
   <nav class="side col-lg-1">
     <div class="up">
       <button class="btn" id="product" @click="toHome"></button>
-      <button class="btn" id="history"></button>
+      <button class="btn" id="history" @click="toHistory"></button>
       <button class="btn" id="addition" @click="$emit('toggle-active')"></button>
     </div>
     <div class="down">
@@ -19,7 +19,7 @@ export default {
       this.$router.push('/home')
     },
     toHistory () {
-      this.$router.push('/history')
+      alert('Halaman history belum tersedia')
     }
   }
 }

@@ -31,13 +31,11 @@ export default new Vuex.Store({
       const isCart = state.carts.find((item) => {
         return item.id === payload.id
       })
-      console.log(isCart)
       if (!isCart) {
         const item = payload
         item.count = 1
         state.carts.push(item)
       } else {
-        console.log(payload.id)
         state.carts = state.carts.filter((item) => {
           return item.id !== payload.id
         })

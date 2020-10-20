@@ -13,16 +13,18 @@
               <option value="idCategory">Category</option>
             </select>
           </div>
+          <Pagination :data="pagination" @page-event="handlePage" />
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search" @keyup="setSearch">
           </div>
         </div>
-        <Pagination :data="pagination" @page-event="handlePage" />
         <div class="lower">
           <Card
-            v-for="item in products" :key="item.id"
-            :data="item" @toggle-event="addCart(item)"
-            :active="checkProductActive(item.id)"
+            v-for="item in products"
+            :key="item.id"
+            :data="item"
+            @toggle-event="addCart(item)"
+            :active="checkActive(item.id)"
             @event-update="setUpdate(item)"
             @select-product="addCart(item)"
             @toggle-delete="toggleDelete"
@@ -49,7 +51,7 @@
 import Navbar from '../../../components/Home/Navbar'
 import Sidebar from '../../../components/Sidebar'
 import Card from '../../../components/Home/Card'
-import Cart from '../../../components/Home/Cart'
+import Cart from './components/Cart'
 import Modal from '../../../components/Home/Modal'
 import Exit from './components/ExitModal'
 import Delete from './components/DeleteModal'
@@ -174,7 +176,7 @@ export default {
       const url = `?page=${number}`
       this.getProducts(url)
     },
-    checkProductActive (id) {
+    checkActive (id) {
       return this.getCart.find(item => {
         return item.id === id
       })

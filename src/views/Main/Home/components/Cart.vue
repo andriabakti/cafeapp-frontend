@@ -1,24 +1,24 @@
 <template>
     <div class="cart col-md-4">
-        <div class="empty">
-            <img src="../../assets/images/pan.png">
+        <div class="empty" v-if="countCart == 0">
+            <img src="../../../../assets/images/pan.png">
             <h3>Your cart is empty</h3>
             <p>Please add some items from the menu</p>
         </div>
-        <ul class="list-unstyled card">
-            <li class="media"  v-for="item in getCart" :key="item.id">
+        <ul class="list-unstyled card" v-if="countCart > 0">
+            <li class="media" v-for="item in getCart" :key="item.id">
                 <div class="container-img">
                     <img :src="item.image" class="mr-3">
                 </div>
                 <div class="media-body">
                     <h6 class="mt-0 mb-1">{{item.name}}</h6>
                     <div class="cart-body">
-                        <h5>{{item.price}}</h5>
                         <div class="count-box">
-                            <button> -</button>
+                            <button @click="setMin">-</button>
                             <input type="number" name="count" value="1" disabled>
-                            <button>+</button>
+                            <button @click="setAdd">+</button>
                         </div>
+                        <h5>Rp. {{new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 3 }).format(item.price)}}</h5>
                     </div>
                 </div>
             </li>
@@ -31,12 +31,14 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Cart',
-  data () {
-    return {
-    }
+  data: () => {
+    return {}
   },
   computed: {
-    ...mapGetters(['getCart'])
+    ...mapGetters([
+      'getCart',
+      'countCart'
+    ])
   }
 }
 </script>
@@ -47,13 +49,15 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-left: 1px solid #CECECE;
+    /* border-left: 1px solid #CECECE; */
     /* overflow: auto; */
 }
 .card {
     position: absolute;
     width: 100%;
-    display: flex;
+    height: 50vh;
+    overflow: auto;
+    /* display: flex; */
     /* align-items: center; */
     /* background-color: coral; */
 }
@@ -99,11 +103,18 @@ export default {
     object-fit: cover;
 }
 .media{
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #CECECE;
 }
 .count-box button {
     border-style: none;
     border: 1px solid green;
     color: green;
 }
+/* .count-box input {
+    text-align: center;
+} */
 </style>
