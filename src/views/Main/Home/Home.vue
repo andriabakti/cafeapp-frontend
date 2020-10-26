@@ -13,7 +13,6 @@
               <option value="idCategory">Category</option>
             </select>
           </div>
-          <Pagination :data="pagination" @page-event="handlePage" />
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search" @keyup="setSearch">
           </div>
@@ -30,6 +29,7 @@
             @toggle-delete="toggleDelete"
           />
         </div>
+        <Pagination :data="pagination" @page-event="handlePage" />
       </div>
       <Cart />
     </div>
@@ -65,10 +65,10 @@ export default {
     Sidebar,
     Card,
     Cart,
+    Pagination,
     Modal,
     Exit,
-    Delete,
-    Pagination
+    Delete
   },
   data: () => ({
     username: '',
@@ -210,12 +210,13 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   padding-top: 15px;
+  background-color: coral;
 }
 .lower {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
 }
 </style>

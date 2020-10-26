@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-          <button type="button" class="close" aria-label="Close" @click="$emit('close-delete')">
+          <button type="button" class="close btn" aria-label="Close" @click="$emit('close-delete')">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
